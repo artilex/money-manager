@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmConfigService } from './config';
 import { CategoriesModule } from './modules/categories/categories.module';
+import { TransactionsModule } from './modules/transactions/transactions.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
       useClass: TypeOrmConfigService,
     }),
     CategoriesModule,
+    TransactionsModule,
   ],
   controllers: [],
   providers: [],
