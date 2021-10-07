@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { Transaction } from './transaction.entity';
 import { TransactionsService } from './transactions.service';
 
@@ -9,6 +17,23 @@ export class TransactionsController {
   @Post()
   async create(@Body() body): Promise<Transaction> {
     return this.transactionsService.createTransaction(body);
+  }
+
+  // TODO: Test this
+  @Put(':transactionId')
+  async update(
+    @Body() body,
+    @Param('transactionId') transactionId: string,
+  ): Promise<Transaction> {
+    return this.transactionsService.updateTransaction(transactionId, body);
+  }
+
+  // TODO: Test this
+  @Delete(':transactionId')
+  async delete(@Param('transactionId') transactionId: string): Promise<string> {
+    await this.transactionsService.deleteTransaction(transactionId);
+
+    return transactionId;
   }
 
   @Get()

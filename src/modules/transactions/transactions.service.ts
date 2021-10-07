@@ -16,6 +16,19 @@ export class TransactionsService {
     return this.transactionRepository.save(transaction);
   }
 
+  async updateTransaction(
+    transactionId: string,
+    rawTransaction: Transaction,
+  ): Promise<Transaction> {
+    await this.transactionRepository.update(transactionId, rawTransaction);
+
+    return this.transactionRepository.findOne(transactionId);
+  }
+
+  async deleteTransaction(transactionId: string): Promise<void> {
+    await this.transactionRepository.delete({ id: transactionId });
+  }
+
   async getList(): Promise<Transaction[]> {
     return this.transactionRepository.find({
       order: { transactionDate: 'DESC', createdAt: 'DESC' },
